@@ -19,6 +19,5 @@
 
     <modules>
         <module>poker-webapp</module>
-        <module>common-poker</module>
     </modules>
 </project>

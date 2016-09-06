@@ -8,7 +8,7 @@ public enum CardValue {
     private int number;
     private String display;
 
-    CardValue(int number, String display) {
+    CardValue(final int number, final String display) {
         this.number = number;
         this.display = display;
     }
@@ -26,7 +26,7 @@ public enum CardValue {
         return display;
     }
 
-    public static CardValue fromDisplay(String display) {
+    public static CardValue fromDisplay(final String display) {
         for (CardValue value : values()) {
             if (value.getDisplay().equals(display)) {
                 return value;

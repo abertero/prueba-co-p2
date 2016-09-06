@@ -5,7 +5,7 @@ public enum Suit {
 
     private String display;
 
-    Suit(String display) {
+    Suit(final String display) {
         this.display = display;
     }
 
@@ -13,7 +13,7 @@ public enum Suit {
         return display;
     }
 
-    public static Suit fromDisplay(String display) {
+    public static Suit fromDisplay(final String display) {
         for (Suit suit : values()) {
             if (suit.getDisplay().equals(display)) {
                 return suit;
