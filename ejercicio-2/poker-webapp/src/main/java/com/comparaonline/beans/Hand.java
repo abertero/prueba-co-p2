@@ -7,7 +7,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 public class Hand {
-    private static final int HAND_SIZE = 5;
+    public static final int HAND_SIZE = 5;
 
     private SortedSet<Card> cards = new TreeSet<>();
 
