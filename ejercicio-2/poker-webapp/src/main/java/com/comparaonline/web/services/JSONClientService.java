@@ -60,6 +60,16 @@ public class JSONClientService {
         return deck;
     }
 
+    public Deck getDeck() {
+        try {
+            String deckToken = getDeckToken();
+            return getDeck(deckToken);
+        } catch (WrongServerResponseException e) {
+            LOGGER.warn(String.format("Problem getting deck token from server.", e));
+            return getLocalDeck();
+        }
+    }
+
     public static void main(final String[] args) throws WrongServerResponseException {
         JSONClientService service = new JSONClientService();
         String token = service.getDeckToken();

@@ -5,6 +5,8 @@ import com.comparaonline.enums.Suit;
 import org.apache.commons.lang.math.NumberUtils;
 import org.codehaus.jackson.JsonNode;
 
+import java.util.List;
+
 public class Card implements Comparable {
     private Suit suit;
     private CardValue number;
@@ -71,5 +73,19 @@ public class Card implements Comparable {
                 }
             }
         }
+    }
+
+    public static Card getHighCardValue(List<Card> cards) {
+        Card highCard = null;
+        for (Card card : cards) {
+            if (card == null || card.getNumber() == null) {
+                continue;
+            } else if (highCard == null) {
+                highCard = card;
+            } else if (card.getNumber().getValue() > highCard.getNumber().getValue()) {
+                highCard = card;
+            }
+        }
+        return highCard;
     }
 }

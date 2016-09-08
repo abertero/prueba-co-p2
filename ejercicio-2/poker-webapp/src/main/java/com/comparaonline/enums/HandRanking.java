@@ -3,6 +3,10 @@ package com.comparaonline.enums;
 import com.comparaonline.beans.Card;
 import com.comparaonline.beans.Hand;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public enum HandRanking {
     HIGH_CARD(1), ONE_PAIR(2), TWO_PAIRS(3), THREE_OF_A_KIND(4),
     STRAIGHT(5), FLUSH(6), FULL_HOUSE(7), FOUR_OF_A_KIND(8), STRAIGHT_FLUSH(9), ROYAL_FLUSH(10);
@@ -55,6 +59,10 @@ public enum HandRanking {
     }
 
     private static boolean twoPairs(Hand hand) {
+        return !getTwoPairs(hand).isEmpty();
+    }
+
+    public static List<CardValue> getTwoPairs(Hand hand) {
         CardValue aux = null;
         CardValue firstPairValue = null;
         for (Card card : hand.getCards()) {
@@ -66,13 +74,17 @@ public enum HandRanking {
                 if (firstPairValue == null) {
                     firstPairValue = aux;
                 } else {
-                    return firstPairValue != aux;
+                    if (firstPairValue != aux) {
+                        return Arrays.asList(firstPairValue, aux);
+                    } else {
+                        return new ArrayList<>();
+                    }
                 }
             } else {
                 aux = card.getNumber();
             }
         }
-        return false;
+        return new ArrayList<>();
     }
 
     /**
@@ -83,14 +95,19 @@ public enum HandRanking {
      * @return true si es que hay la cantidad esperada exactamente.
      */
     private static boolean hasExactlyRepeatsInHand(Hand hand, int expectedRepeats) {
+        return getExactlyRepeatsInHand(hand, expectedRepeats) != null;
+    }
+
+    public static CardValue getExactlyRepeatsInHand(Hand hand, int expectedRepeats) {
         int counter = 0;
         CardValue aux = null;
         for (Card card : hand.getCards()) {
             if (card == null || card.getNumber() == null) {
                 if (counter == expectedRepeats) {
-                    return true;
+                    return aux;
                 } else {
                     counter = 0;
+                    aux = null;
                 }
             } else if (aux == null) {
                 ++counter;
@@ -99,14 +116,14 @@ public enum HandRanking {
                 ++counter;
             } else {
                 if (counter == expectedRepeats) {
-                    return true;
+                    return aux;
                 } else {
                     counter = 1;
                     aux = card.getNumber();
                 }
             }
         }
-        return counter == expectedRepeats;
+        return counter == expectedRepeats ? aux : null;
     }
 
     private static boolean areConsecutiveCards(Hand hand) {
