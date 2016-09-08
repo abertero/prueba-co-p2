@@ -8,17 +8,24 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum HandRanking {
-    HIGH_CARD(1), ONE_PAIR(2), TWO_PAIRS(3), THREE_OF_A_KIND(4),
-    STRAIGHT(5), FLUSH(6), FULL_HOUSE(7), FOUR_OF_A_KIND(8), STRAIGHT_FLUSH(9), ROYAL_FLUSH(10);
+    HIGH_CARD(1, "Highest Card"), ONE_PAIR(2, "One Pair"), TWO_PAIRS(3, "Two Pairs"), THREE_OF_A_KIND(4, "Three of a Kind"),
+    STRAIGHT(5, "Straight"), FLUSH(6, "Flush"), FULL_HOUSE(7, "Full House"), FOUR_OF_A_KIND(8, "Four of a Kind"),
+    STRAIGHT_FLUSH(9, "Straight Flush"), ROYAL_FLUSH(10, "Royal Flush");
 
     private int ranking;
+    private String display;
 
-    HandRanking(int ranking) {
+    HandRanking(int ranking, String display) {
         this.ranking = ranking;
+        this.display = display;
     }
 
     public int getRanking() {
         return ranking;
+    }
+
+    public String getDisplay() {
+        return display;
     }
 
     public static HandRanking ranksHand(Hand hand) {

@@ -19,6 +19,7 @@
                 <div class="card col-xs-1"><img src="${ctx}/static/images/cards/${card.toString()}.png"
                                                 style="max-width: 100%; max-height: 100%;"/></div>
             </c:forEach>
+            <div class="col-xs-4"><spring:message code="game.hand.ranking"/>: <c:out value="${hand1.ranking.display}"/></div>
         </div>
 
 
@@ -29,7 +30,22 @@
                 <div class="card col-xs-1"><img src="${ctx}/static/images/cards/${card.toString()}.png"
                                                 style="max-width: 100%; max-height: 100%;"/></div>
             </c:forEach>
+            <div class="col-xs-4"><spring:message code="game.hand.ranking"/>: <c:out value="${hand2.ranking.display}"/></div>
         </div>
+
+        <h3 style="color: brown;">
+            <c:choose>
+                <c:when test="${comparison==1}">
+                    <spring:message code="game.hand1.won"/>
+                </c:when>
+                <c:when test="${comparison==-1}">
+                    <spring:message code="game.hand2.won"/>
+                </c:when>
+                <c:when test="${comparison==0}">
+                    <spring:message code="game.match.tie"/>
+                </c:when>
+            </c:choose>
+        </h3>
     </c:otherwise>
 </c:choose>
 

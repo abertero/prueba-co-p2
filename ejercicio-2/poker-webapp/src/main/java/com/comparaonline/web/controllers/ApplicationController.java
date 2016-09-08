@@ -41,9 +41,12 @@ public class ApplicationController {
         Hand hand2 = deck.getHand();
         if (hand1 == null || hand2 == null) {
             mv.addObject("notEnoughCards", true);
+        } else {
+            int comparison = hand1.compareTo(hand2);
+            mv.addObject("comparison", comparison);
+            mv.addObject("hand1", hand1);
+            mv.addObject("hand2", hand2);
         }
-        mv.addObject("hand1", hand1);
-        mv.addObject("hand2", hand2);
         return mv;
     }
 
