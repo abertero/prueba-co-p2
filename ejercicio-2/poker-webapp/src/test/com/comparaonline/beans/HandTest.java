@@ -159,4 +159,98 @@ public class HandTest {
         Assert.assertEquals(hand1.compareTo(hand2), -1);
     }
 
+    @Test
+    public void compareTwoPairs() {
+        Hand hand1 = HandRankingTest.createTestHand(
+                new Card(Suit.CLUBS, CardValue.EIGHT),
+                new Card(Suit.HEARTS, CardValue.SIX),
+                new Card(Suit.SPADES, CardValue.SIX),
+                new Card(Suit.DIAMONDS, CardValue.FIVE),
+                new Card(Suit.CLUBS, CardValue.FIVE)
+        );
+        Hand hand2 = HandRankingTest.createTestHand(
+                new Card(Suit.DIAMONDS, CardValue.EIGHT),
+                new Card(Suit.CLUBS, CardValue.SEVEN),
+                new Card(Suit.HEARTS, CardValue.SEVEN),
+                new Card(Suit.SPADES, CardValue.NINE),
+                new Card(Suit.DIAMONDS, CardValue.NINE)
+        );
+        Assert.assertEquals(hand1.compareTo(hand2), -1);
+    }
+
+    @Test
+    public void compareTwoPairsEqualsOnePair() {
+        Hand hand1 = HandRankingTest.createTestHand(
+                new Card(Suit.CLUBS, CardValue.EIGHT),
+                new Card(Suit.HEARTS, CardValue.SIX),
+                new Card(Suit.SPADES, CardValue.SIX),
+                new Card(Suit.HEARTS, CardValue.NINE),
+                new Card(Suit.CLUBS, CardValue.NINE)
+        );
+        Hand hand2 = HandRankingTest.createTestHand(
+                new Card(Suit.DIAMONDS, CardValue.EIGHT),
+                new Card(Suit.CLUBS, CardValue.FIVE),
+                new Card(Suit.HEARTS, CardValue.FIVE),
+                new Card(Suit.SPADES, CardValue.NINE),
+                new Card(Suit.DIAMONDS, CardValue.NINE)
+        );
+        Assert.assertEquals(hand1.compareTo(hand2), 1);
+    }
+
+    @Test
+    public void testTwoPairsEquals() {
+        Hand hand1 = HandRankingTest.createTestHand(
+                new Card(Suit.DIAMONDS, CardValue.EIGHT),
+                new Card(Suit.DIAMONDS, CardValue.FIVE),
+                new Card(Suit.SPADES, CardValue.FIVE),
+                new Card(Suit.HEARTS, CardValue.NINE),
+                new Card(Suit.CLUBS, CardValue.NINE)
+        );
+        Hand hand2 = HandRankingTest.createTestHand(
+                new Card(Suit.CLUBS, CardValue.SEVEN),
+                new Card(Suit.CLUBS, CardValue.FIVE),
+                new Card(Suit.HEARTS, CardValue.FIVE),
+                new Card(Suit.SPADES, CardValue.NINE),
+                new Card(Suit.DIAMONDS, CardValue.NINE)
+        );
+        Assert.assertEquals(hand1.compareTo(hand2), 1);
+    }
+
+    @Test
+    public void testOnePair() {
+        Hand hand1 = HandRankingTest.createTestHand(
+                new Card(Suit.DIAMONDS, CardValue.EIGHT),
+                new Card(Suit.DIAMONDS, CardValue.FIVE),
+                new Card(Suit.SPADES, CardValue.FIVE),
+                new Card(Suit.HEARTS, CardValue.TEN),
+                new Card(Suit.CLUBS, CardValue.NINE)
+        );
+        Hand hand2 = HandRankingTest.createTestHand(
+                new Card(Suit.CLUBS, CardValue.SEVEN),
+                new Card(Suit.CLUBS, CardValue.FIVE),
+                new Card(Suit.HEARTS, CardValue.JACK),
+                new Card(Suit.SPADES, CardValue.NINE),
+                new Card(Suit.DIAMONDS, CardValue.NINE)
+        );
+        Assert.assertEquals(hand1.compareTo(hand2), -1);
+    }
+
+    @Test
+    public void testHighCard() {
+        Hand hand1 = HandRankingTest.createTestHand(
+                new Card(Suit.DIAMONDS, CardValue.EIGHT),
+                new Card(Suit.DIAMONDS, CardValue.FIVE),
+                new Card(Suit.SPADES, CardValue.FOUR),
+                new Card(Suit.HEARTS, CardValue.TEN),
+                new Card(Suit.CLUBS, CardValue.NINE)
+        );
+        Hand hand2 = HandRankingTest.createTestHand(
+                new Card(Suit.CLUBS, CardValue.SEVEN),
+                new Card(Suit.CLUBS, CardValue.FIVE),
+                new Card(Suit.HEARTS, CardValue.JACK),
+                new Card(Suit.SPADES, CardValue.NINE),
+                new Card(Suit.DIAMONDS, CardValue.QUEEN)
+        );
+        Assert.assertEquals(hand1.compareTo(hand2), -1);
+    }
 }
